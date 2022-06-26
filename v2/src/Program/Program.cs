@@ -101,8 +101,9 @@ namespace Ucu.Poo.TelegramBot
             firstHandler =
                 new HelloHandler(
                 new GoodByeHandler(
+                new RegisterUserHandler( 
                 new PhotoHandler(Bot, null)
-            ));
+            )));
 
             var cts = new CancellationTokenSource();
 
