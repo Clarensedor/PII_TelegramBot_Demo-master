@@ -51,7 +51,7 @@ namespace Ucu.Poo.TelegramBot
         /// </summary>
         /// <param name="message">El mensaje a procesar.</param>
         /// <param name="response">La respuesta al mensaje procesado.</param>
-        protected abstract void InternalHandle(Message message, out string response);
+        protected abstract bool InternalHandle(Message message, out string response);
 
         /// <summary>
         /// Este método puede ser sobreescrito en las clases sucesores que procesan varios mensajes cambiando de estado
