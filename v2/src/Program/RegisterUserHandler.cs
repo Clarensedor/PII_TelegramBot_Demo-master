@@ -1,6 +1,8 @@
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Ucu.Poo.TelegramBot
 {
@@ -15,21 +17,34 @@ namespace Ucu.Poo.TelegramBot
         {
             ChainData chainData = ChainData.Instance; 
             string from = message.From.ToString();
-            if (!chainData.userPostionHandler.ContainsKey(from)){
-                chainData.userPostionHandler[from] = "2";
-            }
-            Console.WriteLine("hola");
-            if (chainData.userPostionHandler.ContainsKey(from) && message.Text == "/registrarme")
+            
+           if (this.CanHandle(message) || chainData.userPostionHandler.ContainsKey(from))
+           {
+            if ( message.Text == "/registrarme")
             {
+                Console.WriteLine("va por nombre");
+                chainData.userPostionHandler[from].Add(message.Text);
                 response = "Ingrese nombre usuario:";
-                chainData.userPostionHandler[from] = "regis1";
-                return true;
+                return true;                
             }
-            Console.WriteLine(chainData.userPostionHandler[from]);
-            if(chainData.userPostionHandler[from] == "regis1"){ 
-                response = "Ingrese apellido usuario:";
-                return true;
-            }
+           
+             if(chainData.userPostionHandler[from][0]=="/registrarme")
+                { 
+                    Console.WriteLine("va por apellido");
+                    chainData.userPostionHandler[from].Add(message.Text);
+                    response = "Ingrese apellido usuario:";
+                    
+
+                    return true;
+                }
+                if (chainData.userPostionHandler[from][0].Equals("/registrarme") && chainData.userPostionHandler[from].Count==2)
+                {
+                    response = $"{message.Text}{chainData.userPostionHandler[from][1]}FUNCA";
+                    return true;
+                }
+            
+
+           }
             response = "adios";
             return false;
        

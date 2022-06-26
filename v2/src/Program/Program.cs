@@ -100,10 +100,9 @@ namespace Ucu.Poo.TelegramBot
 
             firstHandler =
                 new HelloHandler(
-                new GoodByeHandler(
-                new RegisterUserHandler( 
-                new PhotoHandler(Bot, null)
-            )));
+                new RegisterUserHandler(
+                new GoodByeHandler(null)
+            ));
 
             var cts = new CancellationTokenSource();
 
@@ -143,7 +142,7 @@ namespace Ucu.Poo.TelegramBot
                     await HandleMessageReceived(botClient, update.Message);
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 await HandleErrorAsync(botClient, e, cancellationToken);
             }

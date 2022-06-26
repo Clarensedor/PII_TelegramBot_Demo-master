@@ -1,4 +1,7 @@
 using Telegram.Bot.Types;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Ucu.Poo.TelegramBot
 {
@@ -24,6 +27,8 @@ namespace Ucu.Poo.TelegramBot
         /// <returns>true si el mensaje fue procesado; false en caso contrario.</returns>
         protected override bool InternalHandle(Message message, out string response)
         {
+            ChainData chainData = ChainData.Instance; 
+            chainData.userPostionHandler.Add(message.From.ToString(), new Collection<string>());
             response = "¡Hola! ¿Cómo estás?";
             return false;
         }
